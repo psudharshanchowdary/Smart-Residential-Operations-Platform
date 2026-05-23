@@ -89,10 +89,9 @@ Log in with the default accounts (automatically generated on the first run):
 
 <div align="center">
   <h3>🎬 Watch Demo Video</h3>
-  <video width="560" height="315" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);" controls>
-    <source src="https://drive.google.com/uc?export=download&id=1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <a href="https://drive.google.com/uc?export=download&id=1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH" target="_blank">
+    <img alt="Watch Demo Video" src="https://img.shields.io/badge/Watch%20Demo-Google%20Drive-red?style=for-the-badge&logo=googledrive" />
+  </a>
   <p><em>Full platform walkthrough showing admin and resident features</em></p>
 </div>
 
