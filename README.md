@@ -75,7 +75,7 @@ Ensure MongoDB is running locally on port `27017`.
 #### 3. Run Frontend & Backend
 Run the concurrent script from the root folder to spin up both the Vite client and the Express backend:
 ```bash
-npm run start
+npm run dev
 ```
 *   **Client**: `http://localhost:8080`
 *   **Backend Server**: `http://localhost:5000`

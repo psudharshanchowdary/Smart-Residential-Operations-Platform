@@ -4,16 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "lsof -ti :5000 | xargs kill -9 2>/dev/null; concurrently --names \"SERVER,CLIENT\" --prefix-colors \"cyan,magenta\" \"cd server && npm run dev\" \"npm run dev\"",
+    "build": "vite build && npm --prefix server install && npm --prefix server run build",
     "build:dev": "vite build --mode development",
-    "build:prod": "npm run build && npm --prefix server install && npm --prefix server run build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "start": "lsof -ti :5000 | xargs kill -9 2>/dev/null; concurrently --names \"SERVER,CLIENT\" --prefix-colors \"cyan,magenta\" \"cd server && npm run dev\" \"npm run dev\"",
-    "start:prod": "node server/dist/index.js"
+    "start": "node server/dist/index.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
