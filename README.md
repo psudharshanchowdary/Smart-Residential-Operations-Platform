@@ -1,7 +1,7 @@
 # Smart Residential Operations Platform
 
 ### About it
-**Smart Residential Operations Platform** is a full-stack, role-based housing management portal designed to streamline communication, maintenance request routing, fee payments, and interactive operational workflows for both administrators and residents.
+**Smart Residential Operations Platform** is a full-stack, role-based housing management portal designed to streamline communication, maintenance request routing, fee payments, and interactive oper[...]
 
 ---
 
@@ -13,7 +13,7 @@
 
 ### Features
 *   **Dual-Role Access Control**: Secure login pages with dashboards that render differently depending on whether the user is an **Admin** or a **Resident**.
-*   **Real-time Maintenance Ticketing**: Residents submit requests specifying category, urgency, and description. Admins assign technicians (with contact info) and update progress, pushing live status updates via WebSocket.
+*   **Real-time Maintenance Ticketing**: Residents submit requests specifying category, urgency, and description. Admins assign technicians (with contact info) and update progress, pushing live st[...]
 *   **Interactive Community Bulletin**:
     *   **Notices**: Building-wide text broadcasts from management.
     *   **Events**: Details and timings of community functions.
@@ -30,15 +30,15 @@
 
 ### The Process
 1.  **Mongoose Data Architecture**: Created separate schemas for `User`, `MaintenanceRequest`, `Payment`, `Notice`, `Event`, and `Poll`.
-2.  **RESTful API Setup**: Designed controllers and protected endpoint routes. Integrated JWT checking middleware to ensure that administrative tasks (such as assigning technicians, deleting notices) are restricted to authorized admins only.
-3.  **Real-Time Subscriptions**: Mounted Socket.io endpoints. On connection, the client subscribes to designated room channels (`user:userId` or `role:admin`). Triggering a status change on the backend emits an event to all subscribed clients in that room.
+2.  **RESTful API Setup**: Designed controllers and protected endpoint routes. Integrated JWT checking middleware to ensure that administrative tasks (such as assigning technicians, deleting notic[...]
+3.  **Real-Time Subscriptions**: Mounted Socket.io endpoints. On connection, the client subscribes to designated room channels (`user:userId` or `role:admin`). Triggering a status change on the ba[...]
 4.  **Client-Side Query Optimization**: Leveraged TanStack Query for asynchronous HTTP states, utilizing automatic page cache invalidation on socket event triggers.
 
 ---
 
 ### What I Learned
 *   **Dynamic WebSocket Coordination**: Creating authenticated client rooms based on JWT claims and syncing state seamlessly over ws channels.
-*   **Client-Server Synchronization**: Using TanStack React Query's cache invalidation system (`queryClient.invalidateQueries`) to re-sync data immediately when the server pushes a websocket notification.
+*   **Client-Server Synchronization**: Using TanStack React Query's cache invalidation system (`queryClient.invalidateQueries`) to re-sync data immediately when the server pushes a websocket notif[...]
 *   **Role-Based Security Guards**: Restricting private routes on the frontend via React Router components and enforcing access verification at the API layer.
 *   **Flexible CORS Policies**: Creating dynamic CORS handlers to allow concurrent local endpoints on both hostnames (`localhost` and `127.0.0.1`) and variable port ranges in local environments.
 
@@ -86,10 +86,16 @@ Log in with the default accounts (automatically generated on the first run):
 *   **Resident Access**: Email: `resident@apt.com` / Password: `resident123`
 
 #### 5. Demo Video
+
 <div align="center">
-  <a href="https://drive.google.com/file/d/1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH/view?usp=sharing" target="_blank">
-    <img src="https://img.shields.io/badge/Watch_Demo_Video-Google_Drive-red?style=for-the-badge&logo=googledrive" alt="Demo Video" />
-  </a>
+  <h3>📺 Watch Demo Video</h3>
+  <p>
+    <a href="https://drive.google.com/uc?export=download&id=1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH" target="_blank">
+      <img src="https://img.shields.io/badge/📥_Download_Video-Google_Drive-red?style=for-the-badge&logo=googledrive" alt="Download Video" />
+    </a>
+  </p>
+  <p>Or stream directly:</p>
+  <iframe width="560" height="315" src="https://drive.google.com/file/d/1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH/preview" frameborder="0" allowfullscreen></iframe>
 </div>
 
 ---
