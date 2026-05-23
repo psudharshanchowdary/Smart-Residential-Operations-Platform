@@ -85,10 +85,7 @@ Log in with the default accounts (automatically generated on the first run):
 *   **Admin Access**: Email: `admin@apt.com` / Password: `admin123`
 *   **Resident Access**: Email: `resident@apt.com` / Password: `resident123`
 
-#### 5. Live Demo
-https://smart-residential-operations-platform-1.onrender.com/
-
-#### 6. Demo Video
+#### 5. Demo Video
 <div align="center">
   <a href="https://drive.google.com/file/d/1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH/view?usp=sharing" target="_blank">
     <img src="https://img.shields.io/badge/Watch_Demo_Video-Google_Drive-red?style=for-the-badge&logo=googledrive" alt="Demo Video" />
