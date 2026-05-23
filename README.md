@@ -89,7 +89,7 @@ Log in with the default accounts (automatically generated on the first run):
 
 <div align="center">
   <h3>🎬 Watch Demo Video</h3>
-  <a href="https://drive.google.com/uc?export=download&id=1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH" target="_blank">
+  <a href="https://drive.google.com/file/d/1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH/view?usp=sharing" target="_blank">
     <img alt="Watch Demo Video" src="https://img.shields.io/badge/Watch%20Demo-Google%20Drive-red?style=for-the-badge&logo=googledrive" />
   </a>
   <p><em>Full platform walkthrough showing admin and resident features</em></p>
