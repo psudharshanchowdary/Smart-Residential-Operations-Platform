@@ -88,14 +88,12 @@ Log in with the default accounts (automatically generated on the first run):
 #### 5. Demo Video
 
 <div align="center">
-  <h3>📺 Watch Demo Video</h3>
-  <p>
-    <a href="https://drive.google.com/uc?export=download&id=1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH" target="_blank">
-      <img src="https://img.shields.io/badge/📥_Download_Video-Google_Drive-red?style=for-the-badge&logo=googledrive" alt="Download Video" />
-    </a>
-  </p>
-  <p>Or stream directly:</p>
-  <iframe width="560" height="315" src="https://drive.google.com/file/d/1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH/preview" frameborder="0" allowfullscreen></iframe>
+  <h3>🎬 Watch Demo Video</h3>
+  <video width="560" height="315" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);" controls>
+    <source src="https://drive.google.com/uc?export=download&id=1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p><em>Full platform walkthrough showing admin and resident features</em></p>
 </div>
 
 ---
