@@ -84,3 +84,8 @@ npm run dev
 Log in with the default accounts (automatically generated on the first run):
 *   **Admin Access**: Email: `admin@apt.com` / Password: `admin123`
 *   **Resident Access**: Email: `resident@apt.com` / Password: `resident123`
+
+#### 5. LINK 
+https://smart-residential-operations-platform-1.onrender.com/
+
+#### 6. VIDEO
