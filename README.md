@@ -1,182 +1,86 @@
-# 🏢 Apartment Hub — Smart Apartment Management System
+# Smart Residential Operations Platform
 
-Welcome to **Apartment Hub**, a premium, real-time, hybrid monolithic & event-driven management system designed for modern smart apartments. This platform facilitates seamless communication, maintenance request dispatching, billing/payments, community polling, and notices between building administrators and residents.
-
----
-
-## ⚡ Key Features
-
-### 👤 User Roles
-* **Admin Dashboard:** Access all requests, allocate technicians, post building-wide announcements, launch polls, create maintenance bills, and respond to complaints.
-* **Resident Dashboard:** Submit maintenance requests (with image attachments), pay pending dues, vote on active polls, view announcements, and register complaints.
-
-### 🔌 Real-Time Layer
-* Integrated **Socket.io** event layer for real-time community notices, system alerts, and instant dashboard syncs without needing page reloads.
-
-### 🛠️ Maintenance & Logistics
-* Custom status pipelines (Pending ➡️ In Progress ➡️ Completed) with technician assignment details (Name, Contact No.) for maintenance issues.
+### About it
+**Smart Residential Operations Platform** is a full-stack, role-based housing management portal designed to streamline communication, maintenance request routing, fee payments, and interactive operations between building administrators and residents. The platform replaces disjointed emails and paper systems with real-time updates and data-driven dashboards.
 
 ---
 
-## 🔤 Programming & Markup Languages Used
-
-The project is built entirely using modern web standards, emphasizing type safety and styling flexibility:
-
-* **TypeScript (`.ts`, `.tsx`):** Used for both Frontend (React) and Backend (Express). It provides static typing, autocompletion, and catches potential code errors at compile-time instead of runtime.
-* **JavaScript (ES6+):** The base execution language for the entire Node.js runtime and web browser.
-* **HTML5:** Used as the structural entry point for the React single-page application (`index.html`).
-* **CSS3 (Vanilla + Tailwind Utility Classes):** Used for maximum layout responsiveness, interactive hover animations, and custom theme layouts.
+### Technologies
+*   **Frontend Client**: React.js, TypeScript, Vite, Tailwind CSS, Radix UI (via shadcn/ui), TanStack React Query, Axios, React Router DOM, Recharts (for analytics and graphs), Socket.io-client.
+*   **Backend Server**: Node.js, Express.js, TypeScript, MongoDB & Mongoose (ODM), Socket.io, JSON Web Token (JWT), BcryptJS.
 
 ---
 
-## 🛠️ Developer Tools & Frameworks
-
-The application's ecosystem relies on standard, industry-grade tools divided between development, database, and servers:
-
-### 1. Database & Services
-* **MongoDB:** A document-oriented NoSQL database used to store application records (users, tickets, notices, payments) in flexible JSON-like documents.
-* **Mongoose ODM:** An Object Document Mapper (library) for Node.js that applies schemas and structure to raw MongoDB collections.
-* **Homebrew (`brew`):** Used to download, manage, and start the local MongoDB service (`mongodb-community`) on macOS.
-* **MongoDB Shell (`mongosh`):** The terminal utility used to run database queries directly.
-
-### 2. Backend (Server)
-* **Node.js & Express.js:** The JavaScript runtime and lightweight server framework used to build the REST API endpoints.
-* **Socket.io:** A WebSocket library enabling real-time, bi-directional communication between the server and client (used for instant noticeboard/alert updates).
-* **ts-node-dev:** A development tool that compiles TypeScript files in memory and automatically restarts the backend server whenever code changes are saved.
-* **Bcrypt.js:** A hashing library used to secure user passwords in the database.
-
-### 3. Frontend (Client)
-* **Vite:** A next-generation build tool that serves the React frontend locally with ultra-fast Hot Module Replacement (HMR).
-* **React 18:** The frontend UI library using component-based architecture and React hooks (`useState`, `useEffect`, `useContext`) for state management.
-* **Shadcn UI & Tailwind CSS:** UI libraries used to create clean, responsive components (buttons, cards, inputs, dialog modals) with unified styling tokens.
-* **Axios:** A promise-based HTTP client used to send REST requests to the backend with automated JWT token attachment for session security.
+### Features
+*   **Dual-Role Access Control**: Secure login pages with dashboards that render differently depending on whether the user is an **Admin** or a **Resident**.
+*   **Real-time Maintenance Ticketing**: Residents submit requests specifying category, urgency, and description. Admins assign technicians (with contact info) and update progress, pushing live status alerts back to the resident's client immediately.
+*   **Interactive Community Bulletin**:
+    *   **Notices**: Building-wide text broadcasts from management.
+    *   **Events**: Details and timings of community functions.
+    *   **Polls**: Interactive voting forms allowing residents to submit votes and see real-time graphical result updates.
+*   **Rent & Fee Payments Ledger**: Displays bills, tracks transaction status (Pending/Paid), and logs payment records (date, payment method, reference IDs).
+*   **Analytics Control Center**: Admin dashboards display charts of service ticket frequencies and pending payment distributions.
 
 ---
 
-## 🏗️ Architecture & Technical Design
-
-Apartment Hub is designed using a **Monolithic + Event-Driven hybrid architecture**. A single Express backend manages transactions, while a Socket.io websocket connection ensures instant client-side state synchronization.
-
-```mermaid
-graph TD
-    A[React Client - Vite] <-->|HTTP REST / JSON| B[Express.js Server]
-    A <-->|WebSockets / Realtime| C[Socket.io Server]
-    B <-->|Mongoose ODM| D[(MongoDB Database)]
-    C <--> D
-```
-
-### Key Architectural Concepts
-* **Hybrid Monolith:** Having the frontend and backend in one repository structure simplifies deployment, minimizes latency, and keeps database models directly aligned with the business logic.
-* **Event-Driven Real-Time Sync:** By incorporating **WebSockets (Socket.io)**, the app doesn't require users to refresh their pages to get notices or ticket status changes. The server broadcasts updates immediately to connected clients.
-* **Commercial Viability:** The project utilizes standard corporate design patterns: secure session control via JSON Web Tokens (JWT), hashed database secrets, separation of administrative privileges, and dynamic component styling.
+### Keyboard Shortcuts
+*   **Toggle Sidebar Navigation**: `Ctrl + B` (on Windows/Linux) or `Cmd + B` (on macOS) instantly collapses or expands the navigation sidebar.
 
 ---
 
-## 🗄️ Database Collections (MongoDB)
-
-The `apartment_hub` database uses the following schemas:
-
-1. **`users`**: Profiles containing name, hashed password, role (`admin` or `resident`), unit number, and building metadata.
-2. **`maintenancerequests`**: Tickets tracking resident issues, category, priority, status, assigned technician, and optional image links.
-3. **`payments`**: Resident maintenance bills, payment dates, amounts, transaction IDs, and statuses (`Pending` or `Paid`).
-4. **`notices`**: Interactive noticeboard announcements posted by administrators.
-5. **`complaints`**: Resident grievances and corresponding management resolutions.
-6. **`polls`**: Democratic building votes with option tallies.
-7. **`events`**: Calendar items and social invitations.
+### The Process
+1.  **Mongoose Data Architecture**: Created separate schemas for `User`, `MaintenanceRequest`, `Payment`, `Notice`, `Event`, and `Poll`.
+2.  **RESTful API Setup**: Designed controllers and protected endpoint routes. Integrated JWT checking middleware to ensure that administrative tasks (such as assigning technicians, deleting notices, or seeding databases) are blocked from standard resident access.
+3.  **Real-Time Subscriptions**: Mounted Socket.io endpoints. On connection, the client subscribes to designated room channels (`user:userId` or `role:admin`). Triggering a status change on the backend prompts the server to broadcast an event payload to the room.
+4.  **Client-Side Query Optimization**: Leveraged TanStack Query for asynchronous HTTP states, utilizing automatic page cache invalidation on socket event triggers.
 
 ---
 
-## 🚀 Setup & Execution Guide
-
-### 📋 Prerequisites
-Ensure you have the following installed on your machine:
-* [Node.js (v18+)](https://nodejs.org/)
-* [Homebrew](https://brew.sh/) (for MongoDB installation on macOS)
+### What I Learned
+*   **Dynamic WebSocket Coordination**: Creating authenticated client rooms based on JWT claims and syncing state seamlessly over ws channels.
+*   **Client-Server Synchronization**: Using TanStack React Query's cache invalidation system (`queryClient.invalidateQueries`) to re-sync data immediately when the server pushes a websocket notice.
+*   **Role-Based Security Guards**: Restricting private routes on the frontend via React Router components and enforcing access verification at the API layer.
+*   **Flexible CORS Policies**: Creating dynamic CORS handlers to allow concurrent local endpoints on both hostnames (`localhost` and `127.0.0.1`) and variable port ranges in local environments.
 
 ---
 
-### 📦 Installation
+### Overall Growth
+*   **Full-Stack Development Integration**: Transitioned from creating basic frontend apps to architecting complete data-driven, real-time client-server systems.
+*   **Robust Security Principles**: Learned to implement industry-standard hashing protocols (Bcrypt) and session handling (JWT).
+*   **Real-time Thinking**: Mastered building user interfaces that react instantly to back-end event streams without requiring full page refetches.
 
-Clone the repository and install the dependencies for both client and server:
+---
 
+### How It Can Be Improved
+*   **Automated Payment Gateways**: Integrate a Stripe or PayPal sandbox gateway to process real-time mock transactions instead of manual logging.
+*   **PDF Invoicing**: Add server-side receipt generators to let residents download official PDF transaction records.
+*   **Push & SMS Alerts**: Incorporate Twilio or SendGrid APIs to notify residents of urgent maintenance completions or emergency building closures.
+*   **Multi-Property SaaS**: Scale the schema design to support multiple apartment complexes under a single database deployment.
+
+---
+
+### Running the Project
+#### 1. Installation
+Install all dependencies in the root and server folders:
 ```bash
-# 1. Navigate to the project root directory
-cd "/Users/pavulurusudharshanchowdary/apartment-hub-main 1"
-
-# 2. Install Frontend dependencies
 npm install
-
-# 3. Install Backend dependencies
-cd server && npm install
+cd server
+npm install
+cd ..
 ```
 
----
+#### 2. Local Service
+Ensure MongoDB is running locally on port `27017`.
 
-### 🏃 Running the Application
-
-Always run the database first, followed by the servers.
-
-#### **Step 1: Start MongoDB**
+#### 3. Run Frontend & Backend
+Run the concurrent script from the root folder to spin up both the Vite client and the Express backend:
 ```bash
-brew services start mongodb-community
+npm run start
 ```
+*   **Client**: `http://localhost:8080`
+*   **Backend Server**: `http://localhost:5000`
 
-#### **Step 2: Start Backend Server (Tab 1)**
-Open a new Terminal tab and run:
-```bash
-cd "/Users/pavulurusudharshanchowdary/apartment-hub-main 1/server"
-npm run dev
-```
-*Runs on [http://localhost:5000](http://localhost:5000)*
-
-#### **Step 3: Start Frontend Client (Tab 2)**
-Open another Terminal tab and run:
-```bash
-cd "/Users/pavulurusudharshanchowdary/apartment-hub-main 1"
-npm run dev
-```
-*Runs on [http://localhost:8080](http://localhost:8080)*
-
-#### **Alternative (Single-Command Start)**
-You can also launch both client and server simultaneously using `concurrently`:
-```bash
-cd "/Users/pavulurusudharshanchowdary/apartment-hub-main 1"
-npm start
-```
-
----
-
-## 🔑 Default Demo Accounts
-
-The database seeds itself automatically on first launch. You can use these credentials to log in:
-
-| Role | Email Address | Password | Details |
-| :--- | :--- | :--- | :--- |
-| **Administrator** | `admin@apt.com` | `admin123` | Full dashboard management access |
-| **Resident** | `resident@apt.com` | `resident123` | Standard resident utility access |
-
----
-
-## 🛠️ Troubleshooting
-
-### 1. `EADDRINUSE: address already in use :::5000` or `:::8080`
-This happens when a previous node server process did not close completely. Run this command to kill the old processes:
-```bash
-lsof -ti :5000 | xargs kill -9; lsof -ti :8080 | xargs kill -9
-```
-
-### 2. MongoDB connection errors on start
-If the backend crashes with a Mongoose connection error, make sure the MongoDB daemon is active:
-```bash
-brew services list
-```
-If `mongodb-community` is stopped, start it:
-```bash
-brew services start mongodb-community
-```
-
-### 3. Debugging Frontend Login Failures
-If you submit your credentials on the web UI and receive a login error, check the browser console for details:
-* Right-click anywhere on the webpage and select **Inspect**.
-* Click the **Console** tab.
-* Retype your password and click **Login** to see the raw error code (e.g. CORS block, server offline, or invalid hash verification).
+#### 4. Seed Logins
+Log in with the default accounts (automatically generated on the first run):
+*   **Admin Access**: Email: `admin@apt.com` / Password: `admin123`
+*   **Resident Access**: Email: `resident@apt.com` / Password: `resident123`
