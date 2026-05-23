@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import http from "http";
 import cors from "cors";
+import path from "path";
 import { connectDB } from "./config/db";
 import { initSocket } from "./socket/events";
 import { seedDatabase } from "./seed";
@@ -58,6 +59,18 @@ app.use("/api/complaints", complaintRoutes);
 // Health check
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+// Serve static files from the React client build directory
+const clientDistPath = path.resolve(__dirname, "../../dist");
+app.use(express.static(clientDistPath));
+
+// Catch-all route to serve index.html for client-side routing
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api/")) {
+    return next();
+  }
+  res.sendFile(path.join(clientDistPath, "index.html"));
 });
 
 // ── Bootstrap ────────────────────────────────────────────────────────────────
