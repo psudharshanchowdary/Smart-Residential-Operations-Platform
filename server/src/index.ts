@@ -39,7 +39,8 @@ app.use(
       ) {
         return callback(null, true);
       }
-      callback(new Error("Not allowed by CORS"));
+      // Return false instead of throwing an Error to prevent 500 server crashes on same-origin requests
+      callback(null, false);
     },
     credentials: true,
   })
