@@ -1,7 +1,7 @@
 # Smart Residential Operations Platform
 
 ### About it
-**Smart Residential Operations Platform** is a full-stack, role-based housing management portal designed to streamline communication, maintenance request routing, fee payments, and interactive operations between building administrators and residents. The platform replaces disjointed emails and paper systems with real-time updates and data-driven dashboards.
+**Smart Residential Operations Platform** is a full-stack, role-based housing management portal designed to streamline communication, maintenance request routing, fee payments, and interactive operational workflows for both administrators and residents.
 
 ---
 
@@ -13,7 +13,7 @@
 
 ### Features
 *   **Dual-Role Access Control**: Secure login pages with dashboards that render differently depending on whether the user is an **Admin** or a **Resident**.
-*   **Real-time Maintenance Ticketing**: Residents submit requests specifying category, urgency, and description. Admins assign technicians (with contact info) and update progress, pushing live status alerts back to the resident's client immediately.
+*   **Real-time Maintenance Ticketing**: Residents submit requests specifying category, urgency, and description. Admins assign technicians (with contact info) and update progress, pushing live status updates via WebSocket.
 *   **Interactive Community Bulletin**:
     *   **Notices**: Building-wide text broadcasts from management.
     *   **Events**: Details and timings of community functions.
@@ -30,15 +30,15 @@
 
 ### The Process
 1.  **Mongoose Data Architecture**: Created separate schemas for `User`, `MaintenanceRequest`, `Payment`, `Notice`, `Event`, and `Poll`.
-2.  **RESTful API Setup**: Designed controllers and protected endpoint routes. Integrated JWT checking middleware to ensure that administrative tasks (such as assigning technicians, deleting notices, or seeding databases) are blocked from standard resident access.
-3.  **Real-Time Subscriptions**: Mounted Socket.io endpoints. On connection, the client subscribes to designated room channels (`user:userId` or `role:admin`). Triggering a status change on the backend prompts the server to broadcast an event payload to the room.
+2.  **RESTful API Setup**: Designed controllers and protected endpoint routes. Integrated JWT checking middleware to ensure that administrative tasks (such as assigning technicians, deleting notices) are restricted to authorized admins only.
+3.  **Real-Time Subscriptions**: Mounted Socket.io endpoints. On connection, the client subscribes to designated room channels (`user:userId` or `role:admin`). Triggering a status change on the backend emits an event to all subscribed clients in that room.
 4.  **Client-Side Query Optimization**: Leveraged TanStack Query for asynchronous HTTP states, utilizing automatic page cache invalidation on socket event triggers.
 
 ---
 
 ### What I Learned
 *   **Dynamic WebSocket Coordination**: Creating authenticated client rooms based on JWT claims and syncing state seamlessly over ws channels.
-*   **Client-Server Synchronization**: Using TanStack React Query's cache invalidation system (`queryClient.invalidateQueries`) to re-sync data immediately when the server pushes a websocket notice.
+*   **Client-Server Synchronization**: Using TanStack React Query's cache invalidation system (`queryClient.invalidateQueries`) to re-sync data immediately when the server pushes a websocket notification.
 *   **Role-Based Security Guards**: Restricting private routes on the frontend via React Router components and enforcing access verification at the API layer.
 *   **Flexible CORS Policies**: Creating dynamic CORS handlers to allow concurrent local endpoints on both hostnames (`localhost` and `127.0.0.1`) and variable port ranges in local environments.
 
@@ -85,7 +85,14 @@ Log in with the default accounts (automatically generated on the first run):
 *   **Admin Access**: Email: `admin@apt.com` / Password: `admin123`
 *   **Resident Access**: Email: `resident@apt.com` / Password: `resident123`
 
-#### 5. LINK 
+#### 5. Live Demo
 https://smart-residential-operations-platform-1.onrender.com/
 
-#### 6. VIDEO
+#### 6. Demo Video
+<div align="center">
+  <a href="https://drive.google.com/file/d/1RVz8xbyl5wuQ7xJK277psLJrFTFMtiiH/view?usp=sharing" target="_blank">
+    <img src="https://img.shields.io/badge/Watch_Demo_Video-Google_Drive-red?style=for-the-badge&logo=googledrive" alt="Demo Video" />
+  </a>
+</div>
+
+---
