@@ -36,7 +36,7 @@ const Login = () => {
     } else {
       toast({
         title: "Login failed",
-        description: "Invalid email or password. Check your credentials and make sure the server is running.",
+        description: "Invalid email or password. Please check your credentials.",
         variant: "destructive",
       });
     }
